@@ -1,3 +1,3 @@
 import * as React from "react";
 
-export const Home = () => <div></div>;
+export const Home: React.FC = () => <div></div>;

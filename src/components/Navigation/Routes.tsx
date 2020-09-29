@@ -1,5 +1,6 @@
 import { About } from "../../pages/About";
 import { Home } from "../../pages/Home";
+import Login from "../Login";
 
 export const Routes = [
   {
@@ -11,5 +12,10 @@ export const Routes = [
     path: "/about",
     sidebarName: "ABOUT",
     component: About,
+  },
+  {
+    path: "/login",
+    sidebarName: "LOGIN",
+    component: Login,
   },
 ];

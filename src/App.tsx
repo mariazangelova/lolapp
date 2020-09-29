@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
+import { Routes } from "./components/Navigation/Routes";
 import NavigationBar from "./components/Navigation";
 
 function App() {
@@ -9,7 +9,11 @@ function App() {
       <header></header>
       <NavigationBar />
       <Switch>
-        <Route exact path="/" component={Home} />
+        {Routes.map((route: any) => (
+          <Route exact path={route.path} key={route.path}>
+            <route.component />
+          </Route>
+        ))}
       </Switch>
     </div>
   );

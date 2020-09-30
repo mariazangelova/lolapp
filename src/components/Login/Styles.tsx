@@ -11,10 +11,11 @@ export const useStyles = makeStyles((theme: Theme) =>
     loginBtn: {
       marginTop: theme.spacing(2),
       flexGrow: 1,
+      background: "teal",
     },
     header: {
       textAlign: "center",
-      background: "#212121",
+      background: "teal",
       color: "#fff",
     },
     card: {

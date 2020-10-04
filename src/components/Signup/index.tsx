@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN } from "../../graphql/queries";
+import { SIGNUP } from "../../graphql/queries";
 import { useStyles } from "./Styles";
 
 import {
@@ -12,11 +12,11 @@ import {
   Button,
 } from "@material-ui/core";
 
-const Login = () => {
+const Signup = () => {
   const classes = useStyles();
   let username: any;
   let password: any;
-  const [login, { error, data }] = useMutation(LOGIN);
+  const [signup, { error, data }] = useMutation(SIGNUP);
   return (
     <div>
       {error ? <p>Oh no! {error.message}</p> : null}
@@ -26,14 +26,14 @@ const Login = () => {
         autoComplete="off"
         onSubmit={(e) => {
           e.preventDefault();
-          login({
+          signup({
             variables: { username: username.value, password: username.value },
           });
           username.value = "";
         }}
       >
         <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Login" />
+          <CardHeader className={classes.header} title="Signup" />
           <CardContent>
             <div>
               <Input
@@ -54,6 +54,12 @@ const Login = () => {
                   password = node;
                 }}
               />
+              <Input
+                fullWidth
+                id="confirm-password"
+                type="password"
+                placeholder="Repeat password"
+              />
             </div>
           </CardContent>
           <CardActions>
@@ -63,7 +69,7 @@ const Login = () => {
               type="submit"
               className={classes.loginBtn}
             >
-              Login
+              Signup
             </Button>
           </CardActions>
         </Card>
@@ -71,4 +77,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default Signup;

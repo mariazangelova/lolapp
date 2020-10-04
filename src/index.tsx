@@ -5,36 +5,32 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+} from "@apollo/client";
+// import { onError } from "@apollo/client/link/error";
+// import { ApolloLink } from "apollo-link";
 
-const link = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.map(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
-    );
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   if (graphQLErrors)
+//     graphQLErrors.map(({ message, locations, path }) =>
+//       console.log(
+//         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+//       )
+//     );
+//   if (networkError) console.log(`[Network error]: ${networkError}`);
+// });
+
+// const httpLink = new HttpLink({ uri: "http://localhost:4000/" });
+// const link = ApolloLink.from([errorLink, httpLink]);
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/",
-  link,
   cache: new InMemoryCache(),
 });
-// client
-//   .query({
-//     query: gql`
-//       query GetUsers {
-//         users {
-//           username
-//           password
-//         }
-//       }
-//     `,
-//   })
-//   .then((result) => console.log(result));
 
 ReactDOM.render(
   <React.StrictMode>

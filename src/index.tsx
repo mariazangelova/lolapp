@@ -6,9 +6,21 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
+
+const link = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/",
+  link,
   cache: new InMemoryCache(),
 });
 // client

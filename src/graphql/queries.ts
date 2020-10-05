@@ -22,3 +22,14 @@ export const SIGNUP = gql`
     }
   }
 `;
+export const GET_BOOKS = gql`
+  query GetBooks {
+    books {
+      id
+      title
+      author
+      description
+      image
+    }
+  }
+`;

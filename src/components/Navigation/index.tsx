@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { Routes } from "./Routes";
 
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { useStyles } from "./Styles";
+
 import {
   AppBar,
   Toolbar,
@@ -14,32 +15,6 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    appBar: {
-      background: "teal",
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    menuList: {
-      color: "teal",
-    },
-    title: {
-      flexGrow: 1,
-    },
-    drawer: {
-      width: 300,
-    },
-    fullList: {
-      width: "auto",
-    },
-  })
-);
 
 const NavigationBar: React.FC = (props: any) => {
   const classes = useStyles();

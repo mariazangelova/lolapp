@@ -30,6 +30,7 @@ const Signup = () => {
             variables: { username: username.value, password: username.value },
           });
           username.value = "";
+          password.value = "";
         }}
       >
         <Card className={classes.card}>
@@ -41,7 +42,7 @@ const Signup = () => {
                 id="username"
                 type="username"
                 placeholder="Username"
-                ref={(node) => {
+                inputRef={(node) => {
                   username = node;
                 }}
               />
@@ -50,13 +51,13 @@ const Signup = () => {
                 id="password"
                 type="password"
                 placeholder="Password"
-                ref={(node) => {
+                inputRef={(node) => {
                   password = node;
                 }}
               />
               <Input
                 fullWidth
-                id="confirm-password"
+                id="confirmpassword"
                 type="password"
                 placeholder="Repeat password"
               />

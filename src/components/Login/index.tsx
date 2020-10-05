@@ -30,6 +30,7 @@ const Login = () => {
             variables: { username: username.value, password: username.value },
           });
           username.value = "";
+          password.value = "";
         }}
       >
         <Card className={classes.card}>
@@ -41,7 +42,7 @@ const Login = () => {
                 id="username"
                 type="username"
                 placeholder="Username"
-                ref={(node) => {
+                inputRef={(node) => {
                   username = node;
                 }}
               />
@@ -50,7 +51,7 @@ const Login = () => {
                 id="password"
                 type="password"
                 placeholder="Password"
-                ref={(node) => {
+                inputRef={(node) => {
                   password = node;
                 }}
               />

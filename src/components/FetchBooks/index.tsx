@@ -18,6 +18,7 @@ interface Book {
   author: string;
   description: string;
   image: string;
+  genres: { name: string }[];
 }
 
 interface Books {
@@ -61,6 +62,7 @@ export function FetchBooks() {
           author={book.author}
           description={book.description}
           image={book.image}
+          genres={book.genres}
         />
       ))}
     </div>

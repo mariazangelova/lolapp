@@ -30,6 +30,9 @@ export const GET_BOOKS = gql`
       author
       description
       image
+      genres {
+        name
+      }
     }
   }
 `;

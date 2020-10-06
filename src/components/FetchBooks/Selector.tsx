@@ -25,6 +25,9 @@ export const Selector: React.FC<PropsInterface> = ({
         id="demo-simple-select-helper"
         onChange={(e) => selectGenre(e.target.value)}
       >
+        <MenuItem value={"all"}>
+          <em>select all</em>
+        </MenuItem>
         {filters?.map((genre: Genre, index: number) => (
           <MenuItem key={index} value={genre.name}>
             {genre.name}

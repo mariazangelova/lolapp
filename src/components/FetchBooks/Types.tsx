@@ -9,6 +9,7 @@ export interface Book {
 
 export interface Books {
   books: [Book];
+  filteredBooks: [Book];
 }
 
 export interface Genre {

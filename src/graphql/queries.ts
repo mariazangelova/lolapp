@@ -36,3 +36,11 @@ export const GET_BOOKS = gql`
     }
   }
 `;
+
+export const GET_GENRES = gql`
+  query GetGenres {
+    genres {
+      name
+    }
+  }
+`;

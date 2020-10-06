@@ -12,17 +12,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
-type genre = {
-  name: string;
-};
-interface Book {
-  title: string;
-  author: string;
-  description: string;
-  image: string;
-  genres: genre[];
-}
+import { Genre } from "./Types";
 
 export function Book(props: any) {
   const classes = useStyles();
@@ -47,8 +37,10 @@ export function Book(props: any) {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          {props.genres?.map((genre: { name: string }) => (
-            <span style={{ margin: "5px" }}>{genre.name}</span>
+          {props.genres?.map((genre: Genre, index: number) => (
+            <span key={index} style={{ margin: "5px" }}>
+              {genre.name}
+            </span>
           ))}
         </Button>
         <Button size="small" color="primary">

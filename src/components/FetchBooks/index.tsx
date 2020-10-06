@@ -1,33 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_BOOKS } from "../../graphql/queries";
+import { GET_BOOKS, GET_GENRES } from "../../graphql/queries";
 
 import { useStyles } from "./Styles";
 import ErrorIcon from "@material-ui/icons/Error";
 
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import { Book } from "./BookCard";
-
-interface Book {
-  id: string;
-  title: string;
-  author: string;
-  description: string;
-  image: string;
-  genres: { name: string }[];
-}
-
-interface Books {
-  books: [Book];
-}
+import { Selector } from "./Selector";
+import { Books, Genres } from "./Types";
 
 export function FetchBooks() {
+  const [selectedGenre, setGenre] = useState<string>("");
   const classes = useStyles();
   const { loading, error, data } = useQuery<Books>(GET_BOOKS);
+  const { data: filters } = useQuery<Genres>(GET_GENRES);
   if (loading) return <p>Loading...</p>;
   if (error)
     return (
@@ -36,25 +22,14 @@ export function FetchBooks() {
         Error! ${error.message}
       </p>
     );
+  console.log(selectedGenre);
+
   return (
     <div className={classes.list}>
-      {/* <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={age}
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        <FormHelperText>Some important helper text</FormHelperText>
-      </FormControl> */}
+      <Selector
+        filters={filters?.genres}
+        selectGenre={(selectedGenre: string) => setGenre(selectedGenre)}
+      />
       {data?.books.map((book) => (
         <Book
           key={book.id}

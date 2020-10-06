@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { useStyles } from "./Styles";
 import { Genre } from "./Types";
@@ -42,9 +43,11 @@ export function Book(props: any) {
             </span>
           ))}
         </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+        <Link to={`/books/${props.title}`} style={{ textDecoration: "none" }}>
+          <Button size="small" color="primary">
+            Learn More
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

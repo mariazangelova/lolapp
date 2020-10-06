@@ -18,7 +18,7 @@ export const Selector: React.FC<PropsInterface> = ({
   const classes = useStyles();
 
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl className={classes.selector}>
       <InputLabel id="demo-simple-select-helper-label">Genre</InputLabel>
       <Select
         labelId="demo-simple-select-helper-label"

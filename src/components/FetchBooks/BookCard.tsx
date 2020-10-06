@@ -16,7 +16,7 @@ import {
 export function Book(props: any) {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -30,7 +30,7 @@ export function Book(props: any) {
             {props.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
+            {props.description.substring(0, 200)}...
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     drawer: {
+      background: "whitesmoke",
       width: 300,
     },
     fullList: {

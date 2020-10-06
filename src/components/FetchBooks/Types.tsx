@@ -1,3 +1,5 @@
+import { ApolloError } from "@apollo/client";
+
 export interface Book {
   id: string;
   title: string;
@@ -10,6 +12,9 @@ export interface Book {
 export interface Books {
   books: [Book];
   filteredBooks: [Book];
+  loading: boolean;
+  error: ApolloError | undefined;
+  data: Books | undefined;
 }
 
 export interface Genre {

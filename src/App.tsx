@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import { Routes } from "./components/Navigation/Routes";
 import NavigationBar from "./components/Navigation";
 import { BookPage } from "./components/FetchBooks/BookPage";
+import { BooksProvider } from "./context/BooksContext";
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
             <route.component />
           </Route>
         ))}
-        <Route path="/books/:name" component={BookPage} />
+        <BooksProvider>
+          <Route path="/books/:title" component={BookPage} />
+        </BooksProvider>
       </Switch>
     </div>
   );

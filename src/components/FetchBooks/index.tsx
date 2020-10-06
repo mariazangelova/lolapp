@@ -1,27 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_BOOKS, GET_GENRES } from "../../graphql/queries";
+import { GET_GENRES } from "../../graphql/queries";
 
 import { useStyles } from "./Styles";
 import ErrorIcon from "@material-ui/icons/Error";
 
 import { Book } from "./BookCard";
 import { Selector } from "./Selector";
-import { Books, Genres } from "./Types";
+import { Genres } from "./Types";
+import { BooksContext } from "../../context/BooksContext";
 
 export function FetchBooks() {
+  const data = useContext(BooksContext);
   const [selectedGenre, setGenre] = useState<string>("all");
   const classes = useStyles();
-  const { loading, error, data } = useQuery<Books>(GET_BOOKS);
   const { data: filters } = useQuery<Genres>(GET_GENRES);
-  if (loading) return <p>Loading...</p>;
-  if (error)
-    return (
-      <p>
-        <ErrorIcon fontSize="large" />
-        Error! ${error.message}
-      </p>
-    );
+  // if (loading) return <p>Loading...</p>;
+  // if (error)
+  //   return (
+  //     <p>
+  //       <ErrorIcon fontSize="large" />
+  //       Error! ${error.message}
+  //     </p>
+  //   );
 
   const filteredBooks =
     selectedGenre === "all"

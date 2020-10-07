@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { BooksContext } from "../../context/BooksContext";
-import { ADD_COMMENT } from "../../graphql/queries";
+import { ADD_COMMENT, GET_BOOKS } from "../../graphql/queries";
 
 import { useStyles } from "./Styles";
 
@@ -24,6 +24,7 @@ export const BookPage = () => {
   const { title }: any = useParams();
   const [addComment, { error, data }] = useMutation(ADD_COMMENT, {
     onCompleted: (data) => console.log("Data from mutation", data),
+    refetchQueries: () => [{ query: GET_BOOKS }],
     onError: (error) => console.error("Error", error),
   });
   const book = dataBooks?.books.filter((book) => book.title === title)[0];
@@ -71,6 +72,7 @@ export const BookPage = () => {
                       comment: comment,
                     },
                   });
+                  setComment("");
                 }}
               >
                 <TextField

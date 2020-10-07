@@ -7,6 +7,7 @@ export interface Book {
   description: string;
   image: string;
   genres: { name: string }[];
+  comments: { comment: string }[];
 }
 
 export interface Books {

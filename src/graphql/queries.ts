@@ -33,6 +33,9 @@ export const GET_BOOKS = gql`
       genres {
         name
       }
+      comments {
+        comment
+      }
     }
   }
 `;

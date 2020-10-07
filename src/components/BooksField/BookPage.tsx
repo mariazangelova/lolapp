@@ -4,7 +4,7 @@ import { BooksContext } from "../../context/BooksContext";
 
 import { useStyles } from "./Styles";
 
-import { Typography } from "@material-ui/core";
+import { Container, Typography, Grid, Paper } from "@material-ui/core";
 
 export const BookPage = () => {
   const classes = useStyles();
@@ -12,11 +12,23 @@ export const BookPage = () => {
   const { title }: any = useParams();
   const book = data?.books.filter((book) => book.title === title)[0];
   return (
-    <div>
-      <Typography variant="h3">{book?.title}</Typography>
-      <Typography variant="h5">By {book?.author}</Typography>
-      <img src={book?.image} alt={book?.title} />
-      <Typography variant="body1">{book?.description}</Typography>
-    </div>
+    <Container>
+      <div className={classes.pageContent}>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            <Paper className={classes.bookImage}>
+              <img src={book?.image} alt={book?.title} />
+            </Paper>
+          </Grid>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
+              <Typography variant="h3">{book?.title}</Typography>
+              <Typography variant="h5">By {book?.author}</Typography>
+              <Typography variant="body1">{book?.description}</Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
+    </Container>
   );
 };

@@ -1,17 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 import { BooksContext } from "../../context/BooksContext";
+import { ADD_COMMENT } from "../../graphql/queries";
 
 import { useStyles } from "./Styles";
 
-import { Container, Typography, Grid, Paper } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Grid,
+  Paper,
+  TextField,
+  Button,
+  Icon,
+} from "@material-ui/core";
 
 export const BookPage = () => {
   const classes = useStyles();
-  const data = useContext(BooksContext);
+  const dataBooks = useContext(BooksContext);
+  const [comment, setComment] = useState("");
   const { title }: any = useParams();
-  const book = data?.books.filter((book) => book.title === title)[0];
-  console.log(book);
+  const [addComment, { error, data }] = useMutation(ADD_COMMENT, {
+    onCompleted: (data) => console.log("Data from mutation", data),
+    onError: (error) => console.error("Error", error),
+  });
+  const book = dataBooks?.books.filter((book) => book.title === title)[0];
+  if (error) return <p>Error!</p>;
   return (
     <Container>
       <div className={classes.pageContent}>
@@ -29,11 +44,43 @@ export const BookPage = () => {
             </Paper>
           </Grid>
           <Grid item xs>
-            <Paper>
-              <Typography variant="h5">Comments:</Typography>
-              {book?.comments?.map((comment) => (
-                <Typography variant="body2">{comment.comment}</Typography>
-              ))}
+            <Paper className={classes.paper}>
+              <div>
+                <Typography variant="h5">Comments:</Typography>
+                {book?.comments?.map((comment) => (
+                  <Typography
+                    variant="body2"
+                    style={{ margin: "20px 20px 20px 0" }}
+                  >
+                    {comment.comment}
+                  </Typography>
+                ))}
+              </div>
+              <form
+                noValidate
+                autoComplete="off"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  addComment({
+                    variables: {
+                      userId: "5f788c997b162a03c7dbc080",
+                      bookId: book?.id,
+                      comment: comment,
+                    },
+                  });
+                }}
+              >
+                <TextField
+                  id="comment"
+                  label="Add a comment"
+                  placeholder="Write here..."
+                  multiline
+                  variant="outlined"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+                <Button type="submit">Send</Button>
+              </form>
             </Paper>
           </Grid>
         </Grid>

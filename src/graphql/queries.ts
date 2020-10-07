@@ -47,3 +47,11 @@ export const GET_GENRES = gql`
     }
   }
 `;
+
+export const ADD_COMMENT = gql`
+  mutation addComment($userId: ID!, $bookId: ID!, $comment: String!) {
+    addComment(userId: $userId, bookId: $bookId, comment: $comment) {
+      comment
+    }
+  }
+`;

@@ -31,5 +31,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       textAlign: "center",
       padding: theme.spacing(2),
     },
+    commentBox: {
+      margin: "20px 20px 20px 20px",
+      background: "whitesmoke",
+      color: "black",
+    },
   })
 );

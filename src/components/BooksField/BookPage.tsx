@@ -14,6 +14,7 @@ import {
   TextField,
   Button,
   Icon,
+  SnackbarContent,
 } from "@material-ui/core";
 
 export const BookPage = () => {
@@ -48,12 +49,14 @@ export const BookPage = () => {
               <div>
                 <Typography variant="h5">Comments:</Typography>
                 {book?.comments?.map((comment) => (
-                  <Typography
-                    variant="body2"
-                    style={{ margin: "20px 20px 20px 0" }}
-                  >
-                    {comment.comment}
-                  </Typography>
+                  <SnackbarContent
+                    style={{
+                      margin: "20px 20px 20px 20px",
+                      background: "whitesmoke",
+                      color: "black",
+                    }}
+                    message={comment.comment}
+                  />
                 ))}
               </div>
               <form

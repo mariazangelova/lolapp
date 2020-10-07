@@ -6,7 +6,7 @@ import { useStyles } from "./Styles";
 
 import { Typography } from "@material-ui/core";
 
-export function BookPage() {
+export const BookPage = () => {
   const classes = useStyles();
   const data = useContext(BooksContext);
   const { title }: any = useParams();
@@ -19,4 +19,4 @@ export function BookPage() {
       <Typography variant="body1">{book?.description}</Typography>
     </div>
   );
-}
+};

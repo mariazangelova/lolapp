@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { useQuery } from "@apollo/client";
 
-import { Books } from "../components/FetchBooks/Types";
+import { Books } from "../components/BooksField/Types";
 import { GET_BOOKS } from "../graphql/queries";
 
 export const BooksContext = createContext<Books | undefined>(undefined);

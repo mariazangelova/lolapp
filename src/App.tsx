@@ -2,7 +2,7 @@ import * as React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Routes } from "./components/Navigation/Routes";
 import NavigationBar from "./components/Navigation";
-import { BookPage } from "./components/FetchBooks/BookPage";
+import { BookPage } from "./components/BooksField/BookPage";
 import { BooksProvider } from "./context/BooksContext";
 
 function App() {

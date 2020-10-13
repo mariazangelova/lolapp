@@ -24,5 +24,9 @@ export const useStyles = makeStyles((theme: Theme) =>
     fullList: {
       width: "auto",
     },
+    loginBtn: {
+      color: "white",
+      fontSize: "large",
+    },
   })
 );

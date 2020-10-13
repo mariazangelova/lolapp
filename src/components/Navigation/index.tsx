@@ -62,16 +62,14 @@ const NavigationBar: React.FC = (props: any) => {
             </Typography>
             {token ? (
               <Button
+                className={classes.loginBtn}
                 onClick={() => setToken(localStorage.removeItem("token"))}
               >
                 LOGOUT
               </Button>
             ) : (
-              <NavLink
-                style={{ textDecoration: "none", color: "white" }}
-                to={"/login"}
-              >
-                <Button>LOGIN</Button>
+              <NavLink style={{ textDecoration: "none" }} to={"/login"}>
+                <Button className={classes.loginBtn}>LOGIN</Button>
               </NavLink>
             )}
           </Toolbar>

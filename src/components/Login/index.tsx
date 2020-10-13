@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../graphql/queries";
 import { useStyles } from "./Styles";
@@ -10,13 +11,26 @@ import {
   CardActions,
   CardHeader,
   Button,
+  Typography,
 } from "@material-ui/core";
+import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
   const classes = useStyles();
   let username: any;
   let password: any;
   const [login, { error, data }] = useMutation(LOGIN);
+  const token = data?.login;
+  const user = useContext(UserContext);
+  const setToken = user?.setToken;
+  const history = useHistory();
+  useEffect(() => {
+    if (token) {
+      setToken(token);
+      localStorage.setItem("token", token);
+      history.push("/");
+    }
+  }, [token, history]);
   return (
     <div>
       {error ? <p>Oh no! {error.message}</p> : null}
@@ -67,6 +81,15 @@ const Login = () => {
               Login
             </Button>
           </CardActions>
+          <Typography style={{ padding: "20px", textAlign: "center" }}>
+            Not a member?{" "}
+            <Link
+              to="/signup"
+              style={{ textDecoration: "none", color: "teal" }}
+            >
+              Click here to signup.
+            </Link>
+          </Typography>
         </Card>
       </form>
     </div>

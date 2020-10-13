@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { SIGNUP } from "../../graphql/queries";
 import { useStyles } from "./Styles";
@@ -10,13 +11,27 @@ import {
   CardActions,
   CardHeader,
   Button,
+  Typography,
 } from "@material-ui/core";
+import { UserContext } from "../../context/UserContext";
 
-const Signup = () => {
+export const Signup = () => {
   const classes = useStyles();
   let username: any;
   let password: any;
   const [signup, { error, data }] = useMutation(SIGNUP);
+
+  const token = data?.login;
+  const user = useContext(UserContext);
+  const setToken = user?.setToken;
+  const history = useHistory();
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+      setToken(token);
+      history.push("/");
+    }
+  }, [token, history]);
   return (
     <div>
       {error ? <p>Oh no! {error.message}</p> : null}
@@ -73,9 +88,14 @@ const Signup = () => {
               Signup
             </Button>
           </CardActions>
+          <Typography style={{ padding: "20px", textAlign: "center" }}>
+            Already a member?
+            <Link to="/login" style={{ textDecoration: "none", color: "teal" }}>
+              Click here to login.
+            </Link>
+          </Typography>
         </Card>
       </form>
     </div>
   );
 };
-export default Signup;

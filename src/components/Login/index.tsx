@@ -23,10 +23,12 @@ const Login = () => {
   const token = data?.login;
   const user = useContext(UserContext);
   const setToken = user?.setToken;
+  const setUser = user?.setUser;
   const history = useHistory();
   useEffect(() => {
     if (token) {
       setToken(token);
+      setUser({ id: data.login.user.id, username: data.login.user.username });
       localStorage.setItem("token", token);
       history.push("/");
     }

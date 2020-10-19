@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { BooksContext } from "../../context/BooksContext";
+import { UserContext } from "../../context/UserContext";
 import { ADD_COMMENT, GET_BOOKS } from "../../graphql/queries";
 
 import { useStyles } from "./Styles";
@@ -19,6 +20,7 @@ import {
 
 export const BookPage = () => {
   const classes = useStyles();
+  const user = useContext(UserContext);
   const dataBooks = useContext(BooksContext);
   const [comment, setComment] = useState("");
   const { title }: any = useParams();
@@ -29,6 +31,7 @@ export const BookPage = () => {
   });
   const book = dataBooks?.books.filter((book) => book.title === title)[0];
   if (error) return <p>Error!</p>;
+  console.log("ID", user);
   return (
     <Container>
       <div className={classes.pageContent}>
@@ -67,7 +70,7 @@ export const BookPage = () => {
                   e.preventDefault();
                   addComment({
                     variables: {
-                      userId: "5f788c997b162a03c7dbc080",
+                      userId: user?.id,
                       bookId: book?.id,
                       comment: comment,
                     },
